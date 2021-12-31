@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+service PingPongGuide {
+    rpc GetFeature(Ping) returns (Pong) {}
+}
+
+message Ping{
+    int32 number = 1;
+    string ping_string = 3;
+}
+
+message Pong{
+    int32 number = 1;
+    string pong_string = 2;
+}
+ 
