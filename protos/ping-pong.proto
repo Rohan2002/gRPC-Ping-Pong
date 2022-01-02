@@ -1,12 +1,16 @@
 syntax = "proto3";
 
 service PingPongGuide {
-    rpc GetFeature(Ping) returns (Pong) {}
+    rpc GetPingPong(Ping) returns (Pong) {}
+    rpc ServerStreamPingPong(Ping) returns (stream Pong) {}
+    rpc ClientStreamPingPong(stream Ping) returns (Pong) {}
+    rpc BiDirectionalAllPingsThenPong(stream Ping) returns (stream Pong) {}
+    rpc BiDirectionalGetContinuesPingPong(stream Ping) returns (stream Pong) {}
 }
 
 message Ping{
     int32 number = 1;
-    string ping_string = 3;
+    string ping_string = 2;
 }
 
 message Pong{

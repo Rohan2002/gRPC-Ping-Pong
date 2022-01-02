@@ -14,8 +14,28 @@ class PingPongGuideStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.GetFeature = channel.unary_unary(
-                '/PingPongGuide/GetFeature',
+        self.GetPingPong = channel.unary_unary(
+                '/PingPongGuide/GetPingPong',
+                request_serializer=ping__pong__pb2.Ping.SerializeToString,
+                response_deserializer=ping__pong__pb2.Pong.FromString,
+                )
+        self.ServerStreamPingPong = channel.unary_stream(
+                '/PingPongGuide/ServerStreamPingPong',
+                request_serializer=ping__pong__pb2.Ping.SerializeToString,
+                response_deserializer=ping__pong__pb2.Pong.FromString,
+                )
+        self.ClientStreamPingPong = channel.stream_unary(
+                '/PingPongGuide/ClientStreamPingPong',
+                request_serializer=ping__pong__pb2.Ping.SerializeToString,
+                response_deserializer=ping__pong__pb2.Pong.FromString,
+                )
+        self.BiDirectionalAllPingsThenPong = channel.stream_stream(
+                '/PingPongGuide/BiDirectionalAllPingsThenPong',
+                request_serializer=ping__pong__pb2.Ping.SerializeToString,
+                response_deserializer=ping__pong__pb2.Pong.FromString,
+                )
+        self.BiDirectionalGetContinuesPingPong = channel.stream_stream(
+                '/PingPongGuide/BiDirectionalGetContinuesPingPong',
                 request_serializer=ping__pong__pb2.Ping.SerializeToString,
                 response_deserializer=ping__pong__pb2.Pong.FromString,
                 )
@@ -24,7 +44,31 @@ class PingPongGuideStub(object):
 class PingPongGuideServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def GetFeature(self, request, context):
+    def GetPingPong(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ServerStreamPingPong(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ClientStreamPingPong(self, request_iterator, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BiDirectionalAllPingsThenPong(self, request_iterator, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BiDirectionalGetContinuesPingPong(self, request_iterator, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -33,8 +77,28 @@ class PingPongGuideServicer(object):
 
 def add_PingPongGuideServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetFeature': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetFeature,
+            'GetPingPong': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPingPong,
+                    request_deserializer=ping__pong__pb2.Ping.FromString,
+                    response_serializer=ping__pong__pb2.Pong.SerializeToString,
+            ),
+            'ServerStreamPingPong': grpc.unary_stream_rpc_method_handler(
+                    servicer.ServerStreamPingPong,
+                    request_deserializer=ping__pong__pb2.Ping.FromString,
+                    response_serializer=ping__pong__pb2.Pong.SerializeToString,
+            ),
+            'ClientStreamPingPong': grpc.stream_unary_rpc_method_handler(
+                    servicer.ClientStreamPingPong,
+                    request_deserializer=ping__pong__pb2.Ping.FromString,
+                    response_serializer=ping__pong__pb2.Pong.SerializeToString,
+            ),
+            'BiDirectionalAllPingsThenPong': grpc.stream_stream_rpc_method_handler(
+                    servicer.BiDirectionalAllPingsThenPong,
+                    request_deserializer=ping__pong__pb2.Ping.FromString,
+                    response_serializer=ping__pong__pb2.Pong.SerializeToString,
+            ),
+            'BiDirectionalGetContinuesPingPong': grpc.stream_stream_rpc_method_handler(
+                    servicer.BiDirectionalGetContinuesPingPong,
                     request_deserializer=ping__pong__pb2.Ping.FromString,
                     response_serializer=ping__pong__pb2.Pong.SerializeToString,
             ),
@@ -49,7 +113,7 @@ class PingPongGuide(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def GetFeature(request,
+    def GetPingPong(request,
             target,
             options=(),
             channel_credentials=None,
@@ -59,7 +123,75 @@ class PingPongGuide(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/PingPongGuide/GetFeature',
+        return grpc.experimental.unary_unary(request, target, '/PingPongGuide/GetPingPong',
+            ping__pong__pb2.Ping.SerializeToString,
+            ping__pong__pb2.Pong.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ServerStreamPingPong(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/PingPongGuide/ServerStreamPingPong',
+            ping__pong__pb2.Ping.SerializeToString,
+            ping__pong__pb2.Pong.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ClientStreamPingPong(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_unary(request_iterator, target, '/PingPongGuide/ClientStreamPingPong',
+            ping__pong__pb2.Ping.SerializeToString,
+            ping__pong__pb2.Pong.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BiDirectionalAllPingsThenPong(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_stream(request_iterator, target, '/PingPongGuide/BiDirectionalAllPingsThenPong',
+            ping__pong__pb2.Ping.SerializeToString,
+            ping__pong__pb2.Pong.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BiDirectionalGetContinuesPingPong(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_stream(request_iterator, target, '/PingPongGuide/BiDirectionalGetContinuesPingPong',
             ping__pong__pb2.Ping.SerializeToString,
             ping__pong__pb2.Pong.FromString,
             options, channel_credentials,

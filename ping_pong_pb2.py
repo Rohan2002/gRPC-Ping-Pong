@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0fping-pong.proto\"+\n\x04Ping\x12\x0e\n\x06number\x18\x01 \x01(\x05\x12\x13\n\x0bping_string\x18\x03 \x01(\t\"+\n\x04Pong\x12\x0e\n\x06number\x18\x01 \x01(\x05\x12\x13\n\x0bpong_string\x18\x02 \x01(\t2-\n\rPingPongGuide\x12\x1c\n\nGetFeature\x12\x05.Ping\x1a\x05.Pong\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x0fping-pong.proto\"+\n\x04Ping\x12\x0e\n\x06number\x18\x01 \x01(\x05\x12\x13\n\x0bping_string\x18\x02 \x01(\t\"+\n\x04Pong\x12\x0e\n\x06number\x18\x01 \x01(\x05\x12\x13\n\x0bpong_string\x18\x02 \x01(\t2\xf0\x01\n\rPingPongGuide\x12\x1d\n\x0bGetPingPong\x12\x05.Ping\x1a\x05.Pong\"\x00\x12(\n\x14ServerStreamPingPong\x12\x05.Ping\x1a\x05.Pong\"\x00\x30\x01\x12(\n\x14\x43lientStreamPingPong\x12\x05.Ping\x1a\x05.Pong\"\x00(\x01\x12\x33\n\x1d\x42iDirectionalAllPingsThenPong\x12\x05.Ping\x1a\x05.Pong\"\x00(\x01\x30\x01\x12\x37\n!BiDirectionalGetContinuesPingPong\x12\x05.Ping\x1a\x05.Pong\"\x00(\x01\x30\x01\x62\x06proto3'
 )
 
 
@@ -42,7 +42,7 @@ _PING = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='ping_string', full_name='Ping.ping_string', index=1,
-      number=3, type=9, cpp_type=9, label=1,
+      number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -129,13 +129,53 @@ _PINGPONGGUIDE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=109,
-  serialized_end=154,
+  serialized_start=110,
+  serialized_end=350,
   methods=[
   _descriptor.MethodDescriptor(
-    name='GetFeature',
-    full_name='PingPongGuide.GetFeature',
+    name='GetPingPong',
+    full_name='PingPongGuide.GetPingPong',
     index=0,
+    containing_service=None,
+    input_type=_PING,
+    output_type=_PONG,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ServerStreamPingPong',
+    full_name='PingPongGuide.ServerStreamPingPong',
+    index=1,
+    containing_service=None,
+    input_type=_PING,
+    output_type=_PONG,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ClientStreamPingPong',
+    full_name='PingPongGuide.ClientStreamPingPong',
+    index=2,
+    containing_service=None,
+    input_type=_PING,
+    output_type=_PONG,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='BiDirectionalAllPingsThenPong',
+    full_name='PingPongGuide.BiDirectionalAllPingsThenPong',
+    index=3,
+    containing_service=None,
+    input_type=_PING,
+    output_type=_PONG,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='BiDirectionalGetContinuesPingPong',
+    full_name='PingPongGuide.BiDirectionalGetContinuesPingPong',
+    index=4,
     containing_service=None,
     input_type=_PING,
     output_type=_PONG,
